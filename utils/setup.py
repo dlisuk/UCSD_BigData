@@ -18,7 +18,8 @@ print '\n Here are the credentials I found:'
 pp=pprint.PrettyPrinter()
 pp.pprint(Creds)
 
-if len(Creds)>1:
+print "Found %d credentials\n" % len(Creds.keys())
+if len(Creds.keys())>1:
     print "You have creds for ",\
         ' '.join(['(%1d),%s' % (i,Creds.keys()[i])\
                   for i in range(len(Creds.keys()))])
@@ -31,23 +32,24 @@ entry=Creds[ID]
 print 'Using the 0 elements from \n',entry
 key_id=entry['Creds'][0]['Access_Key_Id']
 secret_key=entry['Creds'][0]['Secret_Access_Key']
-# password=entry['Passwords'][0]
+#password=entry['Passwords'][0]
 
-security_group=raw_input('What security group do you want to use? ')
+#security_group=raw_input('What security group do you want to use? ')
+security_group="default"
 security_groups=[security_group]
 
-ssh_key_name=raw_input('What is your ssh key name? ')
-ssh_key_pair_file='///'
+#ssh_key_name=raw_input('What is your ssh key name? ')
+ssh_key_name="WV Keypair"
+ssh_key_pair_file='/Users/dlisuk/.ssh/WVKeypair.pem'
 while not os.path.isfile(ssh_key_pair_file):
     ssh_key_pair_file=raw_input('What is the name (full path) of your keypair file (extension .pem)')
 
-print 'ID: %s, key_id: %s, secret_key: %s, password: %s' % (ID,key_id,secret_key,password)
+print 'ID: %s, key_id: %s, secret_key: %s, password: %s' % (ID,key_id,secret_key,"")
 print 'ssh_key_name:%s, ssh_key_pair_file:%s'%(ssh_key_name,ssh_key_pair_file)
 print 'security groups',security_groups
 
 with open(vault+'/Creds.pkl','wb') as pickle_file:
     pickle.dump({'ID':ID,'key_id':key_id,'secret_key':secret_key,\
-                 'password':password,\
                  'ssh_key_name':ssh_key_name,\
                  'ssh_key_pair_file':ssh_key_pair_file,\
                  'security_groups':security_groups}
