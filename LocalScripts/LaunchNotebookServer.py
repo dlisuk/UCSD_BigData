@@ -176,7 +176,7 @@ if __name__ == "__main__":
                         help='Create an AMI from the current state of the (first) instance')
     parser.add_argument('-p','--password',
                         help='Specify password for notebook (if missing=use existing password)')
-    parser.add_argument('-t','--instance_type',default='t1.micro',
+    parser.add_argument('-t','--instance_type',default='c1.medium',
                         help='Type of instance to launch, Common choices are t1.micro,c1.medium,m3.xlarge, for more info see: https://aws.amazon.com//ec2/instance-types/')
 #Some common choices:
 #              vCPU     ECU	Memory (GiB)	Instance Storage (GB)	Linux/UNIX Usage
@@ -197,7 +197,7 @@ if __name__ == "__main__":
     # print 'args=',args
 
     # open connection to aws
-    print 'The regions you are connected to are:',boto.ec2.regions()
+    print 'The regions you are connected to are:'#,boto.ec2.regions()
     try:
         conn=open_connection(aws_access_key_id,aws_secret_access_key)
     except:
