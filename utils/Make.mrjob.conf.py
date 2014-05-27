@@ -12,12 +12,13 @@ try:
     keypair=Creds['mrjob']
     print 'keypair=',keypair
     template=open('mrjob.conf.template').read()
-    filled= template % (keypair['key_id'],keypair['secret_key'])
+    filled= template % (keypair['ID'],keypair['key_id'],keypair['secret_key'],keypair['s3_logs'],keypair['s3_scratch'])
     home=os.environ['HOME']
     outfile = home+'/.mrjob.conf'
     open(outfile,'wb').write(filled)
     print 'Created the configuration file:',outfile
 except Exception, e:
     print e
+
 
 
